@@ -1,0 +1,73 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <div style="text-align:center"> -->
+
+
+<!-- <div class='switch' *ngFor="let switch of switches; let num=index"> -->
+<!-- <button  (click)='flipSwitch(switch)' [ngClass]="{'on':switch.status}"> -->
+<div class="container">
+  <div *ngIf='success'>
+    <p>Thank you for registering with us {{newUser.first_name}}. We just sent you a confirmation email at {{newUser.email}}, and we will send all mail to {{newUser.street_address}}<span *ngIf='newUser.apt'> {{newUser.apt}}</span>,{{newUser.city}} {{newUser.state}}.</p>
+    <p>Have a wonderful day!</p>
+  </div>
+  <h1>Registration</h1>
+  <div class='box'>
+  <h2>Account Information</h2>
+  <form #form='ngForm' (submit)='onSubmit()'>
+    <label for="">*First Name:
+      <input type="text" name='first_name' required minlength='2' [(ngModel)]="user.first_name" #fname="ngModel" value='Song'>
+    </label>
+    <p class='errMsg' *ngIf='fname.errors'>First name is required and more than 2 letters long.</p>
+    <label for="">*Last Name:
+      <input type="text" name='last_name' [(ngModel)]="user.last_name" required minlength='2' #last_name="ngModel">
+    </label>
+    <p class='errMsg' *ngIf='last_name.errors'>Last name is required and more than 2 letters long.</p>
+    <label for="">*Email:
+      <input type="email" name='email' [(ngModel)]="user.email" required pattern='^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$' #email="ngModel">
+    </label>
+    <p class='errMsg' *ngIf='email.errors'>Email must be valid.</p>
+
+    <label for="">*Password:
+      <input type="password" name='password' [(ngModel)]='user.password' required pattern="^([a-zA-Z0-9@*#.]{17,})$" #password="ngModel">
+    </label>
+    <p class='errMsg' *ngIf='password.errors'>Password must be at least 17 characters long, and contains at least a lower and an upper case letter, a number, and a
+      special character.</p>
+    <label for="">*Password Confirmation:
+      <input type="password" name='password2' [(ngModel)]='user.password2' required #password2='ngModel'>
+      <p class="errMsg" *ngIf='user.password!==user.password2'>Password Confirmation must match Password.</p>
+    </label>
+    <label for="">*Street Address
+      <input type="text" name='street_address' required [(ngModel)]='user.street_address' #street_address='ngModel'>
+    </label>
+    <p class="errMsg" *ngIf='street_address.errors'>Address is required.</p>
+    <label for="">Unit/Apt #
+      <input type="text" name='apt_num' [(ngModel)]='user.apt'>
+    </label>
+    <label for="">*City
+      <input type="text" name='city' required [(ngModel)]='user.city' #city='ngModel'>
+
+    </label>
+    <p class="errMsg" *ngIf='city.errors'>City is required.</p>
+    <label for="">*State
+      <select class='reg' name='state' [(ngModel)]='user.state' required #state='ngModel'>
+        <option>Alaska</option>
+        <option>California</option>
+        <option>Ohio</option>
+      </select>
+    </label>
+    <p class="errMsg" *ngIf='state.errors'>State is required.</p>
+    <label for=""> *I'm feeling lucky:
+      <p class='reg'>
+        <input class='radio' type='radio' name='feelingLucky' value=true required [(ngModel)]='user.feelingLucky' #feeling='ngModel'>
+        <span>Yes</span>
+        <input class='radio' type='radio' name='feelingLucky' value=false required [(ngModel)]='user.feelingLucky'>
+        <span>No</span>
+      </p>
+    </label>
+    <p class="errMsg" *ngIf='feeling.errors'>Choosing how you feel is required</p>
+    <button [disabled]='!form.valid'>Register</button>
+
+    <!-- <p>{{form|json}}</p> -->
+  </form>
+  </div>
+  <!-- <p>{{users[0]|json}}</p> -->
+  <!-- </div> -->
